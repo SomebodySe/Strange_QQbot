@@ -27,6 +27,8 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=note.note(msg))
     elif msg.startswith("/send"):
         await bot.send_group_msg(group_id=group_id, message=msg.split("/send", 1)[1].strip())
+    elif msg == "":
+        return
     #elif msg == "/test":
     else:
         with open('src/plugins/textadd.txt', 'r+', encoding='utf-8') as file:
