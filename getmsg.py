@@ -8,7 +8,9 @@ group_message_handler = on_message(priority=9, block=True)
 @group_message_handler.handle()
 async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     # 获取群号和发送者ID
-    group_id = 980594025 #1004031354  980594025
+    group_id = 1004031354 #1004031354  980594025
+    if event.group_id != group_id:
+        return
     # 获取消息内容
     msg = event.get_plaintext()
     if msg.startswith("服务器状态"):
@@ -29,6 +31,10 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=msg.split("/send", 1)[1].strip())
     elif msg == "":
         return
+    elif msg == "提取表情":
+        with open('src/plugins/image.txt', 'r', encoding='utf-8') as file:
+            file_content = file.read()
+        await bot.send_group_msg(group_id=group_id, message=file_content)
     #elif msg == "/test":
     else:
         with open('src/plugins/textadd.txt', 'r+', encoding='utf-8') as file:
@@ -41,6 +47,3 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
                 file.seek(0)
                 file.truncate()
                 file.write("!)@(#*$&fill")
-
-
-        
