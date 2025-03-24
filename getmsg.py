@@ -1,6 +1,7 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import status,mcwiki,gtwiki,ip,caidan,note
+from src.plugins import status,mcwiki,gtwiki,ip,caidan,note,textadd
+
 # 定义一个处理群消息的处理器
 group_message_handler = on_message(priority=9, block=True)
 
@@ -9,7 +10,7 @@ group_message_handler = on_message(priority=9, block=True)
 async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     # 获取群号和发送者ID
     group_id = event.group_id
-    send_id = 123456789
+    send_id = 980594025
     # 获取消息内容
     msg = event.get_plaintext()
     if msg.startswith("服务器状态"):
@@ -21,7 +22,7 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg.startswith("/ip"):
         await bot.send_group_msg(group_id=group_id, message=ip.ip(msg))
     elif msg == "撸猫":
-        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(987654321) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
+        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
     elif msg == "菜单":
         await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("note"):
@@ -31,18 +32,13 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg == "":
         return
     elif msg == "提取表情":
-        with open('src/plugins/image.txt', 'r', encoding='utf-8') as file:
+        filename = f"src/plugins/imageadd/{group_id}.txt"
+        with open(filename, 'r', encoding='utf-8') as file:
             file_content = file.read()
         await bot.send_group_msg(group_id=group_id, message=file_content)
-    #elif msg == "/test":
     else:
-        with open('src/plugins/textadd.txt', 'r+', encoding='utf-8') as file:
-            if file.read() != msg:
-                file.seek(0)  # 将文件指针移动到开头
-                file.truncate()  # 清空文件内容
-                file.write(msg)  # 写入新的字符串
-            else:
-                await bot.send_group_msg(group_id=group_id, message=msg)
-                file.seek(0)
-                file.truncate()
-                file.write("!)@(#*$&fill")
+        if textadd.textadd(msg, group_id):
+            await bot.send_group_msg(group_id=group_id, message=msg)
+
+
+        
