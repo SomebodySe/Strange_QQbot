@@ -5,7 +5,7 @@ import aiofiles
 import os
 
 # 指定要监听的群组ID
-TARGET_GROUP_ID = 980594025  # 替换为实际的群组ID 1004031354 980594025
+TARGET_GROUP_ID = 123456789
 
 # 定义一个处理群消息的处理器，仅监听指定群组
 save_emoticon = on_message(priority=5, block=False)
