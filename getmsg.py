@@ -8,7 +8,7 @@ group_message_handler = on_message(priority=9, block=True)
 @group_message_handler.handle()
 async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     # 获取群号和发送者ID
-    group_id = 1004031354 #1004031354  980594025
+    group_id = 123456789
     if event.group_id != group_id:
         return
     # 获取消息内容
