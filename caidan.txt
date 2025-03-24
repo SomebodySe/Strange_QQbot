@@ -1,4 +1,4 @@
-服务器状态[xxx]：查看服务器xxx（地址）状态，没参数就查看猫服状态
+服务器状态[xxx]：查看服务器xxx（地址）状态，没参数就查看ip列表内服务器的状态
 
 /gt[XXX]：在GTNH Wiki搜索XXX，回复网址
 
@@ -19,3 +19,5 @@ note<xxx>：把xxx添加到备忘
 <emoji>+<emoji>：组合emoji，例：🤔+🤣
 
 （自动+1）：检测到连续两条相同消息时+1，仅限文本
+
+项目地址：https://github.com/SomebodySe/QQbot-plugins
