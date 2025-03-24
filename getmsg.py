@@ -7,9 +7,8 @@ group_message_handler = on_message(priority=9, block=True)
 
 @group_message_handler.handle()
 async def handle_group_message(bot: Bot, event: GroupMessageEvent):
-    group_id = 123456789
-    if event.group_id != group_id:
-        return
+    # 获取群号和发送者ID
+    group_id = event.group_id
     # 获取消息内容
     msg = event.get_plaintext()
     if msg.startswith("服务器状态"):
@@ -46,3 +45,6 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
                 file.seek(0)
                 file.truncate()
                 file.write("!)@(#*$&fill")
+
+
+        
