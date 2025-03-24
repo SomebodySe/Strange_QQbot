@@ -9,6 +9,7 @@ group_message_handler = on_message(priority=9, block=True)
 async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     # 获取群号和发送者ID
     group_id = event.group_id
+    send_id = 123456789
     # 获取消息内容
     msg = event.get_plaintext()
     if msg.startswith("服务器状态"):
@@ -20,13 +21,13 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg.startswith("/ip"):
         await bot.send_group_msg(group_id=group_id, message=ip.ip(msg))
     elif msg == "撸猫":
-        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
+        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(987654321) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
     elif msg == "菜单":
         await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("note"):
         await bot.send_group_msg(group_id=group_id, message=note.note(msg))
     elif msg.startswith("/send"):
-        await bot.send_group_msg(group_id=group_id, message=msg.split("/send", 1)[1].strip())
+        await bot.send_group_msg(group_id=send_id, message=msg.split("/send", 1)[1].strip())
     elif msg == "":
         return
     elif msg == "提取表情":
@@ -45,6 +46,3 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
                 file.seek(0)
                 file.truncate()
                 file.write("!)@(#*$&fill")
-
-
-        
