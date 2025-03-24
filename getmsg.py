@@ -26,7 +26,7 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg == "菜单":
         await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("note"):
-        await bot.send_group_msg(group_id=group_id, message=note.note(msg))
+        await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id))
     elif msg.startswith("/send"):
         await bot.send_group_msg(group_id=send_id, message=msg.split("/send", 1)[1].strip())
     elif msg == "":
@@ -39,6 +39,3 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     else:
         if textadd.textadd(msg, group_id):
             await bot.send_group_msg(group_id=group_id, message=msg)
-
-
-        
