@@ -14,6 +14,11 @@ note<xxx>：把xxx添加到备忘
 /ipadd <服务器名称> <服务器IP>：添加服务器
 /ipdel <n>：删除列表第n条
 
+/ai<xxx>：问DeepSeek-V3
+/ai+<xxx>：问DeepSeek-R1
+
+/py<xxx>：python运行xxx，不支持中途输入
+
 提取表情：获取最近一条表情的url，复制到浏览器查看（方便手机保存gif）
 
 <emoji>+<emoji>：组合emoji，例：🤔+🤣
