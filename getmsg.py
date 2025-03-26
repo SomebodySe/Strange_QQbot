@@ -1,6 +1,6 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import status,mcwiki,gtwiki,ip,caidan,note,textadd
+from src.plugins import status,mcwiki,gtwiki,ip,caidan,note,textadd,ai
 
 # 定义一个处理群消息的处理器
 group_message_handler = on_message(priority=9, block=True)
@@ -27,8 +27,10 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("note"):
         await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id))
+    elif msg.startswith("/ai"):
+        await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id))
     elif msg.startswith("/send"):
-        await bot.send_group_msg(group_id=send_id, message=msg.split("/send", 1)[1].strip())
+        await bot.send_group_msg(group_id=send_id, message=msg.split("/send", 1)[1])
     elif msg == "":
         return
     elif msg == "提取表情":
@@ -39,3 +41,6 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     else:
         if textadd.textadd(msg, group_id):
             await bot.send_group_msg(group_id=group_id, message=msg)
+
+
+        
