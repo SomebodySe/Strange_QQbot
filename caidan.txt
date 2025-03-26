@@ -4,11 +4,12 @@
 
 /mc[XXX]：在MC百科搜索XXX，回复网址
 
-note<xxx>：把xxx添加到备忘
-    -xxx = 列表：查看备忘列表
-    -xxx = 删除n：删除列表第n个元素
+note：把xxx添加到备忘
+note列表：查看备忘列表
+note删除<n>：删除列表第n个元素
+note删除<xxx>：删除内容xxx（xxx非数字）
 
-撸猫：o.O
+撸猫：o.O ？
 
 /iplist：查看服务器列表
 /ipadd <服务器名称> <服务器IP>：添加服务器
