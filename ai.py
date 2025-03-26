@@ -6,10 +6,12 @@ import os
 def ai(msgx, group_id):
     API_KEY = "sk-2961bc7f08c8456ca997c158edd366b4"  # 替换为你的 API Key
     client = OpenAI(api_key=API_KEY, base_url="https://api.deepseek.com/v1")
-
+    mode = "deepseek-chat"
     filename = f"src/plugins/ai/{group_id}.txt"
     msg = msgx.split("/ai", 1)[1].strip()
-
+    if msg.startswith('+'):
+        msg = msg.split("+", 1)[1].strip()
+        mode = "deepseek-reasoner"
     # 如果文件不存在，则创建
     if not os.path.exists(filename):
         with open(filename, 'w', encoding='utf-8') as file:
@@ -46,7 +48,7 @@ def ai(msgx, group_id):
 
     # 调用 DeepSeek API
     response = client.chat.completions.create(
-        model="deepseek-chat",
+        model=mode,
         messages=messages,
         stream=False
     )
