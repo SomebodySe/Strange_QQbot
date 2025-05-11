@@ -1,6 +1,7 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import status,mcwiki,gtwiki,ip,caidan,note,textadd,ai,py
+from src.plugins import status,mcwiki,gtwiki,ip,caidan,note,textadd,ai,py,page,imageadd
+import os
 
 # 定义一个处理群消息的处理器
 group_message_handler = on_message(priority=9, block=True)
@@ -21,12 +22,14 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=gtwiki.gtwiki(msg))
     elif msg.startswith("/ip"):
         await bot.send_group_msg(group_id=group_id, message=ip.ip(msg))
+    elif msg.startswith("常用网址"):
+        await bot.send_group_msg(group_id=group_id, message=page.page(msg, group_id))
     elif msg == "撸猫":
-        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(54321) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
+        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
     elif msg == "菜单":
         await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("note"):
-        await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id))
+        await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id).strip())
     elif msg.startswith("/ai"):
         await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id))
     elif msg.startswith("/send"):
@@ -35,12 +38,23 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=py.py(msg))
     elif msg == "":
         return
-    elif msg == "提取表情":
+    elif msg == " ":
+        return
+    elif msg.startswith("["):
+        return
+    # elif msg == "提取表情":
+    #     filename = f"src/plugins/imageadd/{group_id}.txt"
+    #     with open(filename, 'r', encoding='utf-8') as file:
+    #         file_content = file.read()
+    #     await bot.send_group_msg(group_id=group_id, message=file_content)
+    elif msg == "/test":
         filename = f"src/plugins/imageadd/{group_id}.txt"
         with open(filename, 'r', encoding='utf-8') as file:
             file_content = file.read()
-        await bot.send_group_msg(group_id=group_id, message=file_content)
+        image_path = os.path.abspath("src/plugins/1.png")
+        await bot.send_group_msg(group_id=group_id, message=MessageSegment.image(f"file://{image_path}"))
     else:
+        imageadd.setempty(group_id)
         if textadd.textadd(msg, group_id):
             await bot.send_group_msg(group_id=group_id, message=msg)
 
