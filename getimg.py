@@ -20,6 +20,11 @@ async def handle_message(bot: Bot, event: GroupMessageEvent):
         if seg.type == "image":
             # 获取图片URL
             image_url = seg.data["url"]
+            
+            filename = f"src/plugins/lastimage/{group_id}.txt"
+            with open(filename, 'w', encoding='utf-8') as file:
+                file.write(image_url)
+
             if imageadd.imageadd(image_url,group_id):
                 content = requests.get(image_url).content
                 ext = imghdr.what(None, content)
