@@ -11,7 +11,6 @@ group_message_handler = on_message(priority=9, block=True)
 async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     # 获取群号和发送者ID
     group_id = event.group_id
-    send_id = 980594025
     # 获取消息内容
     msg = event.get_plaintext()
     if msg.startswith("服务器状态"):
@@ -33,7 +32,9 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg.startswith("/ai"):
         await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id))
     elif msg.startswith("/send"):
-        await bot.send_group_msg(group_id=send_id, message=msg.split("/send", 1)[1])
+        s1 = s[len("/send"):]
+        text_content, number = s1.split(" -g")
+        await bot.send_group_msg(group_id=number, message=text_content)
     elif msg.startswith("/py"):
         await bot.send_group_msg(group_id=group_id, message=py.py(msg))
     elif msg == "":
@@ -50,8 +51,10 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg == "/test":
         filename = f"src/plugins/imageadd/{group_id}.txt"
     elif not msg:
-        # imageadd.setempty(group_id)
-        msg = msg
+        filename = f"src/plugins/textadd/{group_id}.txt"
+        with open(filename, 'w', encoding='utf-8') as file:
+            file.write(f"empty|\\|1")
+        print("空字符")
     else:
         imageadd.setempty(group_id)
         if textadd.textadd(msg, group_id):
