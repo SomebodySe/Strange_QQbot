@@ -20,8 +20,10 @@ note删除<xxx>：删除内容xxx（xxx非数字）
 
 /py<xxx>：python运行xxx，不支持中途输入
 
+图片链接：获取上一个图片/表情的链接
+
 <emoji>+<emoji>：组合emoji，例：🤔+🤣
 
-（自动+1）：检测到连续两条相同消息时+1
+（自动+1）：检测到连续两条相同消息时+1  （目前不支持官方表情包）
 
 项目地址：https://github.com/SomebodySe/QQbot-plugins
