@@ -11,7 +11,7 @@ group_message_handler = on_message(priority=9, block=True)
 async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     # 获取群号和发送者ID
     group_id = event.group_id
-    send_id = 12345
+    send_id = 980594025
     # 获取消息内容
     msg = event.get_plaintext()
     if msg.startswith("服务器状态"):
@@ -42,21 +42,17 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         return
     elif msg.startswith("["):
         return
-    # elif msg == "提取表情":
-    #     filename = f"src/plugins/imageadd/{group_id}.txt"
-    #     with open(filename, 'r', encoding='utf-8') as file:
-    #         file_content = file.read()
-    #     await bot.send_group_msg(group_id=group_id, message=file_content)
-    elif msg == "/test":
-        filename = f"src/plugins/imageadd/{group_id}.txt"
+    elif msg == "图片链接":
+        filename = f"src/plugins/lastimage/{group_id}.txt"
         with open(filename, 'r', encoding='utf-8') as file:
             file_content = file.read()
-        image_path = os.path.abspath("src/plugins/1.png")
-        await bot.send_group_msg(group_id=group_id, message=MessageSegment.image(f"file://{image_path}"))
+        await bot.send_group_msg(group_id=group_id, message=file_content)
+    elif msg == "/test":
+        filename = f"src/plugins/imageadd/{group_id}.txt"
+    elif not msg:
+        # imageadd.setempty(group_id)
+        msg = msg
     else:
         imageadd.setempty(group_id)
         if textadd.textadd(msg, group_id):
-            await bot.send_group_msg(group_id=group_id, message=msg)
-
-
-        
+           await bot.send_group_msg(group_id=group_id, message=msg)
