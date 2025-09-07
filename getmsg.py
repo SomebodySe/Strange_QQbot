@@ -32,7 +32,7 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg.startswith("/ai"):
         await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id))
     elif msg.startswith("/send"):
-        s1 = s[len("/send"):]
+        s1 = msg[len("/send"):]
         text_content, number = s1.split(" -g")
         await bot.send_group_msg(group_id=number, message=text_content)
     elif msg.startswith("/py"):
@@ -59,3 +59,4 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         imageadd.setempty(group_id)
         if textadd.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
+
