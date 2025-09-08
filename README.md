@@ -15,7 +15,7 @@ emojimix来自https://github.com/noneplugin/nonebot-plugin-emojimix/
 
 
 
-```python
+``` bash
 pip install nb-cli  nonebot2[fastapi] nonebot-adapter-onebot openai
 pip install nonebot_plugin_emojimix
 ```
