@@ -24,7 +24,7 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg.startswith("常用网址"):
         await bot.send_group_msg(group_id=group_id, message=page.page(msg, group_id))
     elif msg == "撸猫":
-        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
+        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(123456789) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
     elif msg == "菜单":
         await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("note"):
@@ -59,4 +59,5 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         imageadd.setempty(group_id)
         if textadd.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
+
 
