@@ -24,7 +24,7 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg.startswith("常用网址"):
         await bot.send_group_msg(group_id=group_id, message=page.page(msg, group_id))
     elif msg == "撸猫":
-        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(123456789) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
+        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
     elif msg == "菜单":
         await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("note"):
@@ -37,8 +37,6 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=number, message=text_content)
     elif msg.startswith("/py"):
         await bot.send_group_msg(group_id=group_id, message=py.py(msg))
-    elif msg == "":
-        return
     elif msg == " ":
         return
     elif msg.startswith("["):
@@ -50,14 +48,12 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=file_content)
     elif msg == "/test":
         filename = f"src/plugins/imageadd/{group_id}.txt"
-    elif not msg:
+    elif msg == "":
         filename = f"src/plugins/textadd/{group_id}.txt"
         with open(filename, 'w', encoding='utf-8') as file:
-            file.write(f"empty|\\|1")
-        print("空字符")
+            file.write(f"……empty……|\\|1")
     else:
         imageadd.setempty(group_id)
         if textadd.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
-
-
+        
