@@ -1,6 +1,6 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import imageadd
+from src.plugins import imageadd,caidan
 import requests
 import imghdr
 import os
@@ -17,7 +17,7 @@ async def handle_message(bot: Bot, event: GroupMessageEvent):
 
     # 检查消息中是否包含图片
     for seg in msg:
-        if seg.type == "image":
+        if seg.type == "image" or seg.type == "mface":
             # 获取图片URL
             image_url = seg.data["url"]
             
@@ -36,3 +36,4 @@ async def handle_message(bot: Bot, event: GroupMessageEvent):
                 print("图片相同")
             else:
                 print("图片不同")
+
