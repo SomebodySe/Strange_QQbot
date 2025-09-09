@@ -15,18 +15,16 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     msg = event.get_plaintext()
     if msg.startswith("服务器状态"):
         await bot.send_group_msg(group_id=group_id, message=status.status(msg))
+    elif event.is_tome():
+        await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("/mc"):
         await bot.send_group_msg(group_id=group_id, message=mcwiki.mcwiki(msg))
     elif msg.startswith("/gt"):
         await bot.send_group_msg(group_id=group_id, message=gtwiki.gtwiki(msg))
     elif msg.startswith("/ip"):
         await bot.send_group_msg(group_id=group_id, message=ip.ip(msg))
-    elif msg.startswith("常用网址"):
-        await bot.send_group_msg(group_id=group_id, message=page.page(msg, group_id))
     elif msg == "撸猫":
         await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
-    elif msg == "菜单":
-        await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("note"):
         await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id).strip())
     elif msg.startswith("/ai"):
