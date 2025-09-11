@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, shlex
 
 def py(msgx):
     msg = msgx.split("/py", 1)[1].strip()
@@ -9,6 +9,25 @@ def py(msgx):
         result = subprocess.check_output(["python3", filename], text=True, timeout=5).strip()
     except subprocess.TimeoutExpired:
         return("运行超时")
+    if len(result) > 1000:
+        return result[-1000:]
+    elif result == "":
+        return "无输出"
+    else:
+        return result
+
+
+def pip(msgx):
+    msg = msgx.split("/", 1)[1].strip()
+    if msg.startswith("pip uninstall "):
+        msg += " -y"
+    cmd = ["conda", "run", "-n", "test"] + shlex.split(msg)
+    try:
+        result = subprocess.check_output(cmd, text=True, timeout=100).strip()
+    except subprocess.TimeoutExpired:
+        return("运行超时")
+    except subprocess.CalledProcessError as e:
+        return f"命令错误:\n{e.output}"
     if len(result) > 1000:
         return result[-1000:]
     elif result == "":
