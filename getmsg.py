@@ -35,6 +35,8 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=number, message=text_content)
     elif msg.startswith("/py"):
         await bot.send_group_msg(group_id=group_id, message=py.py(msg))
+    elif msg.startswith("/pip"):
+        await bot.send_group_msg(group_id=group_id, message=py.pip(msg))
     elif msg == " ":
         return
     elif msg.startswith("["):
