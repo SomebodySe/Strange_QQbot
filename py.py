@@ -6,10 +6,17 @@ def py(msgx):
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(msg)
     try:
-        result = subprocess.check_output(["python3", filename], text=True, timeout=5).strip()
+        # 把 stderr 合并到 stdout
+        result = subprocess.check_output(
+            ["python3", filename],
+            text=True,
+            timeout=5,
+            stderr=subprocess.STDOUT
+        ).strip()
     except subprocess.TimeoutExpired:
         return("运行超时")
-    result = result.replace('.', '. ').replace(':', ': ')
+    except subprocess.CalledProcessError as e:
+        result = f"错误:\n{e.output}"
     if len(result) > 1000:
         return result[-1000:]
     elif result == "":
