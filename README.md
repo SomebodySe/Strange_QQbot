@@ -20,13 +20,13 @@
 
 **详见caidan.txt** 
 
-emojimix来自https://github.com/noneplugin/nonebot-plugin-emojimix/
+**emojimix来自https://github.com/noneplugin/nonebot-plugin-emojimix/**
 
 （文件emojimix.py, data_source.py, emoji_data.py, config.py）
 
 
 
-
+# 需要的库：
 ```bash
 pip install nb-cli  nonebot2[fastapi] nonebot-adapter-onebot openai
 pip install nonebot_plugin_emojimix
