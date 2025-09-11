@@ -6,6 +6,8 @@
 
 **3、** if elif(if else) elif(if else) elif elif else 烤串与包饺子技巧
 
+**目前已实现功能见caidan.txt**
+
 
 
 emojimix来自https://github.com/noneplugin/nonebot-plugin-emojimix/
