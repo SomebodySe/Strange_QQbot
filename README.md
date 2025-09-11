@@ -8,7 +8,19 @@
 
 **目前已实现功能见caidan.txt**
 
+# 目前已实现的主要功能：
 
+**1、** 问DeepSeek
+
+**2、** 运行python脚本，以及使用pip命令
+
+**3、** 备忘
+
+**4、** 群消息自动+1
+
+**5、** Minecraft服务器状态查询
+
+**详见caidan.txt** 
 
 emojimix来自https://github.com/noneplugin/nonebot-plugin-emojimix/
 
