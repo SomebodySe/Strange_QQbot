@@ -5,6 +5,7 @@
 /ai+<xxx>：问DeepSeek-R1
 
 /py<xxx>：python运行xxx，不支持中途输入
+/pip<xxx>：使用pip安装/卸载包
 
 note<xxx>：把xxx添加到备忘
 note列表：查看备忘列表
