@@ -9,6 +9,7 @@ def py(msgx):
         result = subprocess.check_output(["python3", filename], text=True, timeout=5).strip()
     except subprocess.TimeoutExpired:
         return("运行超时")
+    result = result.replace('.', '. ').replace(':', ': ')
     if len(result) > 1000:
         return result[-1000:]
     elif result == "":
@@ -23,11 +24,14 @@ def pip(msgx):
         msg += " -y"
     cmd = ["conda", "run", "-n", "test"] + shlex.split(msg)
     try:
-        result = subprocess.check_output(cmd, text=True, timeout=100).strip()
+        result = subprocess.check_output(cmd, text=True, timeout=1000).strip()
     except subprocess.TimeoutExpired:
         return("运行超时")
     except subprocess.CalledProcessError as e:
         return f"命令错误:\n{e.output}"
+
+    result = result.replace('.', '. ').replace(':', ': ')
+
     if len(result) > 1000:
         return result[-1000:]
     elif result == "":
