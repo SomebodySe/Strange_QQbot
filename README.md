@@ -6,8 +6,6 @@
 
 **3、** if elif(if else) elif(if else) elif elif else 烤串与包饺子技巧
 
-**目前已实现功能见caidan.txt**
-
 # 目前已实现的主要功能：
 
 **1、** 问DeepSeek
