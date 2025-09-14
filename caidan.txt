@@ -1,8 +1,8 @@
 👆🏻🤓诶！您艾特到了一个入机！
 
 🔵命令列表：
-/ai<xxx>：问DeepSeek-V3
-/ai+<xxx>：问DeepSeek-R1
+/ai<xxx>：问DeepSeek
+/ai+<xxx>：问DeepSeek(深度思考)
 
 /py<xxx>：python运行xxx，不支持中途输入
 /pip<xxx>：使用pip安装/卸载包
