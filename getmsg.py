@@ -1,6 +1,6 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import status,mcwiki,gtwiki,ip,caidan,note,textadd,ai,py,page,imageadd
+from src.plugins import status,mcwiki,gtwiki,ip,caidan,note,textadd,ai,py,imageadd
 import os
 
 # 定义一个处理群消息的处理器
@@ -14,7 +14,7 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     # 获取消息内容
     msg = event.get_plaintext()
     if msg.startswith("服务器状态"):
-        await bot.send_group_msg(group_id=group_id, message=status.status(msg))
+        await bot.send_group_msg(group_id=group_id, message=status.status(msg, group_id))
     elif event.is_tome():
         await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
     elif msg.startswith("/mc"):
@@ -22,7 +22,7 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg.startswith("/gt"):
         await bot.send_group_msg(group_id=group_id, message=gtwiki.gtwiki(msg))
     elif msg.startswith("/ip"):
-        await bot.send_group_msg(group_id=group_id, message=ip.ip(msg))
+        await bot.send_group_msg(group_id=group_id, message=ip.ip(msg, group_id))
     elif msg.startswith("note"):
         await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id).strip())
     elif msg.startswith("/ai"):
@@ -55,5 +55,3 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         if textadd.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
         
-
-
