@@ -1,12 +1,21 @@
-import shlex
+import shlex, os
 
 # Function to read IPs from file and return as a list of dictionaries
 def read_ips(filename):
+    # 如果文件不存在则创建空文件
+    if not os.path.exists(filename):
+        open(filename, 'w').close()  # 创建空文件
+
     ips = []
     with open(filename, 'r') as f:
         for line in f:
-            name, ip = line.strip().split()
-            ips.append({'name': name, 'ip': ip})
+            line = line.strip()
+            if not line:  # 跳过空行
+                continue
+            parts = line.split()
+            if len(parts) == 2:
+                name, ip = parts
+                ips.append({'name': name, 'ip': ip})
     return ips
 
 # Function to save IPs to file
@@ -36,9 +45,9 @@ def delete_ip(filename, index):
         save_ips(filename, ips)
 
 # Main function to handle command-line arguments
-def ip(msgx):
+def ip(msgx, group_id):
     msg = msgx.split("/ip", 1)[1].strip()
-    filename = "src/plugins/iplist.txt"  # Your IP list file
+    filename = f"src/plugins/ip/{group_id}.txt"  # Your IP list file
 
     if len(msg) < 2:
         return  # No arguments, do nothing
