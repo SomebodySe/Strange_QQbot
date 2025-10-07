@@ -1,9 +1,9 @@
-def status(msg):
+def status(msg, group_id):
     from mcstatus import JavaServer
     try:
         params = msg.split("服务器状态", 1)[1].strip()
         if not params:
-            filename = "src/plugins/iplist.txt"
+            filename = f"src/plugins/ip/{group_id}.txt"
             servers = []
             result = ""
             with open(filename, "r") as f:
@@ -13,7 +13,7 @@ def status(msg):
             # 遍历服务器列表
             for server in servers:
                 result += f"服务器：{server['name']}\n"
-                result += f"IP：{server['ip']}\n"
+                result += f"地址：{server['ip']}\n".replace('.', '. ').replace(':', ': ')
                 try:
                     status = JavaServer.lookup(server["ip"]).status()
                 except Exception as e:
