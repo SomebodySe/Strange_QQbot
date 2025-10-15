@@ -8,17 +8,15 @@
 
 # 目前已实现的主要功能：
 
-**1、** 问DeepSeek
+**1、** 接入DeepSeek（聊天/分析问题）
 
 **2、** 运行python脚本，以及使用pip命令
 
-**3、** 备忘
+**3、** 群消息自动+1
 
-**4、** 群消息自动+1
+**4、** Minecraft服务器状态查询
 
-**5、** Minecraft服务器状态查询
-
-**详见caidan.txt** 
+**详见features.txt** 
 
 **emojimix来自https://github.com/noneplugin/nonebot-plugin-emojimix/**
 
