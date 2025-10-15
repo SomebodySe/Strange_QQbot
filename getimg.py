@@ -1,6 +1,6 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import imageadd,caidan
+from src.plugins import imageadd,features
 import requests
 import imghdr
 import os
@@ -36,4 +36,5 @@ async def handle_message(bot: Bot, event: GroupMessageEvent):
                 print("图片相同")
             else:
                 print("图片不同")
+
 
