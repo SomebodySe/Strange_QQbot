@@ -1,6 +1,6 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import status,mcwiki,gtwiki,ip,caidan,note,textadd,ai,py,imageadd
+from src.plugins import status,mcwiki,gtwiki,ip,features,note,textadd,ai,py,imageadd
 import os
 
 # 定义一个处理群消息的处理器
@@ -16,7 +16,7 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     if msg.startswith("服务器状态"):
         await bot.send_group_msg(group_id=group_id, message=status.status(msg, group_id))
     elif event.is_tome():
-        await bot.send_group_msg(group_id=group_id, message=caidan.caidan())
+        await bot.send_group_msg(group_id=group_id, message=features.features())
     elif msg.startswith("/mc"):
         await bot.send_group_msg(group_id=group_id, message=mcwiki.mcwiki(msg))
     elif msg.startswith("/gt"):
@@ -55,3 +55,4 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         if textadd.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
         
+
