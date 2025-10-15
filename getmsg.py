@@ -11,22 +11,28 @@ group_message_handler = on_message(priority=9, block=True)
 async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     # 获取群号和发送者ID
     group_id = event.group_id
+    user_id = event.user_id
     # 获取消息内容
     msg = event.get_plaintext()
+    
     if msg.startswith("服务器状态"):
         await bot.send_group_msg(group_id=group_id, message=status.status(msg, group_id))
     elif event.is_tome():
-        await bot.send_group_msg(group_id=group_id, message=features.features())
+        await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id, user_id, 1))
+    elif msg.startswith("/ai"):
+        await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id, user_id, 0))
     elif msg.startswith("/mc"):
         await bot.send_group_msg(group_id=group_id, message=mcwiki.mcwiki(msg))
     elif msg.startswith("/gt"):
         await bot.send_group_msg(group_id=group_id, message=gtwiki.gtwiki(msg))
     elif msg.startswith("/ip"):
         await bot.send_group_msg(group_id=group_id, message=ip.ip(msg, group_id))
+    elif msg == "功能菜单":
+        await bot.send_group_msg(group_id=group_id, message=features.features())
+    elif msg == "撸猫":
+        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
     elif msg.startswith("note"):
         await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id).strip())
-    elif msg.startswith("/ai"):
-        await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id))
     elif msg.startswith("/send"):
         s1 = msg[len("/send"):]
         text_content, number = s1.split(" -g")
@@ -52,7 +58,7 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
             file.write(f"……empty……|\\|1")
     else:
         imageadd.setempty(group_id)
+        ai.savemsg(msg, group_id, user_id)
         if textadd.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
         
-
