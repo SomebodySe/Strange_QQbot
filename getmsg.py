@@ -1,6 +1,6 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import status,geturl,ip,features,note,textadd,ai,py,imageadd
+from src.plugins import status,geturl,ip,features,note,ai,py,addone
 import os
 
 # 定义一个处理群消息的处理器
@@ -57,8 +57,8 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         with open(filename, 'w', encoding='utf-8') as file:
             file.write(f"……empty……|\\|1")
     else:
-        imageadd.setempty(group_id)
+        addone.setempty(group_id)
         ai.savemsg(msg, group_id, user_id)
-        if textadd.textadd(msg, group_id):
+        if addone.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
         
