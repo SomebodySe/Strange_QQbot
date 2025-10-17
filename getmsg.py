@@ -1,6 +1,6 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import status,mcwiki,gtwiki,ip,features,note,textadd,ai,py,imageadd
+from src.plugins import status,geturl,ip,features,note,textadd,ai,py,imageadd
 import os
 
 # 定义一个处理群消息的处理器
@@ -22,9 +22,9 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg.startswith("/ai"):
         await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id, user_id, 0))
     elif msg.startswith("/mc"):
-        await bot.send_group_msg(group_id=group_id, message=mcwiki.mcwiki(msg))
+        await bot.send_group_msg(group_id=group_id, message=geturl.mcwiki(msg))
     elif msg.startswith("/gt"):
-        await bot.send_group_msg(group_id=group_id, message=gtwiki.gtwiki(msg))
+        await bot.send_group_msg(group_id=group_id, message=geturl.gtwiki(msg))
     elif msg.startswith("/ip"):
         await bot.send_group_msg(group_id=group_id, message=ip.ip(msg, group_id))
     elif msg == "功能菜单":
