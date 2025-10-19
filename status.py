@@ -1,9 +1,11 @@
+from src.plugins.init import *
+from mcstatus import JavaServer
+
 def status(msg, group_id):
-    from mcstatus import JavaServer
     try:
         params = msg.split("服务器状态", 1)[1].strip()
         if not params:
-            filename = f"src/plugins/addr/{group_id}.txt"
+            filename = f"{ADDR_DIR}/{group_id}.txt"
             servers = []
             result = ""
             with open(filename, "r") as f:
