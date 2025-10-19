@@ -1,11 +1,12 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
 from src.plugins import status,geturl,addr,features,note,ai,py,addone
+from src.plugins.init import *
 import os
 
 # 定义一个处理群消息的处理器
 group_message_handler = on_message(priority=9, block=True)
-
+init()
 
 @group_message_handler.handle()
 async def handle_group_message(bot: Bot, event: GroupMessageEvent):
@@ -29,6 +30,8 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=addr.addr(msg, group_id))
     elif msg == "功能菜单":
         await bot.send_group_msg(group_id=group_id, message=features.features())
+    elif msg == "撸猫":
+        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
     elif msg.startswith("note"):
         await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id).strip())
     elif msg.startswith("/send"):
@@ -44,14 +47,12 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     elif msg.startswith("["):
         return
     elif msg == "图片链接":
-        filename = f"src/plugins/lastimage/{group_id}.txt"
+        filename = f"{LAST_IMG_DIR}/{group_id}.txt"
         with open(filename, 'r', encoding='utf-8') as file:
             file_content = file.read()
         await bot.send_group_msg(group_id=group_id, message=file_content)
-    elif msg == "/test":
-        filename = f"src/plugins/imageadd/{group_id}.txt"
     elif msg == "":
-        filename = f"src/plugins/textadd/{group_id}.txt"
+        filename = f"{TXT_ADD_DIR}/{group_id}.txt"
         with open(filename, 'w', encoding='utf-8') as file:
             file.write(f"……empty……|\\|1")
     else:
@@ -60,4 +61,3 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         if addone.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
         
-
