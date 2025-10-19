@@ -25,8 +25,8 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=geturl.mcwiki(msg))
     elif msg.startswith("/gt"):
         await bot.send_group_msg(group_id=group_id, message=geturl.gtwiki(msg))
-    elif msg.startswith("/ip"):
-        await bot.send_group_msg(group_id=group_id, message=ip.ip(msg, group_id))
+    elif msg.startswith("/addr"):
+        await bot.send_group_msg(group_id=group_id, message=addr.addr(msg, group_id))
     elif msg == "功能菜单":
         await bot.send_group_msg(group_id=group_id, message=features.features())
     elif msg.startswith("note"):
@@ -60,3 +60,4 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         if addone.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
         
+
