@@ -30,8 +30,6 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=addr.addr(msg, group_id))
     elif msg == "功能菜单":
         await bot.send_group_msg(group_id=group_id, message=features.features())
-    elif msg == "撸猫":
-        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
     elif msg.startswith("note"):
         await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id).strip())
     elif msg.startswith("/send"):
@@ -61,3 +59,4 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         if addone.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
         
+
