@@ -3,26 +3,26 @@ def status(msg, group_id):
     try:
         params = msg.split("服务器状态", 1)[1].strip()
         if not params:
-            filename = f"src/plugins/ip/{group_id}.txt"
+            filename = f"src/plugins/addr/{group_id}.txt"
             servers = []
             result = ""
             with open(filename, "r") as f:
                 for line in f:
-                    name, ip = line.strip().split()
-                    servers.append({"name": name, "ip": ip})
+                    name, ad = line.strip().split()
+                    servers.append({"name": name, "addr": ad})
             # 遍历服务器列表
             for server in servers:
                 result += f"服务器：{server['name']}\n"
-                result += f"地址：{server['ip']}\n".replace('.', '. ').replace(':', ': ')
+                result += f"地址：{server['addr']}\n".replace('.', '. ').replace(':', ': ')
                 try:
-                    status = JavaServer.lookup(server["ip"]).status()
+                    status = JavaServer.lookup(server["addr"]).status()
                 except Exception as e:
                     result += f"服爆辣！（{str(e)}）\n\n"
                 else:
                     result += f"在线人数：{status.players.online}\n"
                     if status.players.online != 0 and status.players.sample:
                         result += f"玩家列表：{', '.join([player.name for player in status.players.sample])}\n"
-                    latency = JavaServer.lookup(server["ip"]).ping()
+                    latency = JavaServer.lookup(server["addr"]).ping()
                     result += f"ping：{int(latency)}\n\n"
             return result.strip()
         server_address = params  # 如果有参数，使用第一个参数作为服务器地址
