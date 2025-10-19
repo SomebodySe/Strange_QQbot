@@ -29,7 +29,7 @@ def print_addr(addr):
     result = ""
     for i, ad in enumerate(addr):
         result += f"{i}: {ad['name']} {ad['addr']}\n"
-    return result
+    return result.strip()
 
 # Function to add IP to list
 def add_ad(filename, name, ad):
@@ -41,8 +41,9 @@ def add_ad(filename, name, ad):
 def delete_ad(filename, index):
     addr = read_addr(filename)
     if 0 <= index < len(addr):
-        del addr[index]
+        ad = addr.pop(index)
         save_addr(filename, addr)
+    return ad
 
 # Main function to handle command-line arguments
 def addr(msgx, group_id):
@@ -67,11 +68,11 @@ def addr(msgx, group_id):
         name = args[1]
         ad = args[2]
         add_ad(filename, name, ad)
-        return f"Added: {name} {ad}"
+        return f"已添加服务器: {name} {ad}"
     elif command == "del" and len(args) > 1:
         index = int(args[1])
-        delete_ad(filename, index)
-        return f"Deleted index: {index}"
+        ad = delete_ad(filename, index)
+        return f"已删除服务器{index}: {ad['name']} {ad['addr']}"
     else:
         return "Invalid command or arguments."
 
