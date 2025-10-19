@@ -1,6 +1,7 @@
 import os
 import hashlib
 import requests
+from src.plugins.init import *
 
 def same(url1, url2):
     """比较两张图片是否相同"""
@@ -28,7 +29,7 @@ def same(url1, url2):
 
 def setempty(group_id):
     """重置状态"""
-    filename = f"src/plugins/imageadd/{group_id}.txt"
+    filename = f"{IMG_ADD_DIR}/{group_id}.txt"
     separator = '|\\|'
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(f"empty{separator}0")
@@ -42,7 +43,7 @@ def imageadd(msg, group_id):
     - 同一张图且index=1 -> 不动返回0
     - 不同图 -> 重置url|\|0返回0
     """
-    filename = f"src/plugins/imageadd/{group_id}.txt"
+    filename = f"{IMG_ADD_DIR}/{group_id}.txt"
     separator = '|\\|'
 
     if not os.path.exists(filename):
@@ -83,7 +84,7 @@ def imageadd(msg, group_id):
 
 
 def textadd(msg, group_id):
-    filename = f"src/plugins/textadd/{group_id}.txt"
+    filename = f"{TXT_ADD_DIR}/{group_id}.txt"
     separator = '|\\|'  # 定义分隔符
 
     if not os.path.exists(filename):
