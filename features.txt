@@ -22,9 +22,9 @@ note删除<xxx>：删除内容xxx（xxx非数字）
 /gt[XXX]：在GTNH Wiki搜索XXX，回复网址
 /mc[XXX]：在MC百科搜索XXX，回复网址
 
-/iplist：查看服务器列表
-/ipadd <服务器名称> <服务器IP>：添加服务器
-/ipdel <n>：删除列表第n条（索引从0开始）
+/addr list：查看服务器列表
+/addr add <服务器名称> <服务器地址>：添加服务器
+/addr del <n>：删除列表第n条（索引从0开始）
 
 服务器状态[xxx]：查看服务器xxx（地址）状态，没参数就查看ip列表内服务器的状态
 
