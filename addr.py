@@ -1,4 +1,5 @@
 import shlex, os
+from src.plugins.init import *
 
 # Function to read IPs from file and return as a list of dictionaries
 def read_addr(filename):
@@ -48,7 +49,7 @@ def delete_ad(filename, index):
 # Main function to handle command-line arguments
 def addr(msgx, group_id):
     msg = msgx.split("/addr", 1)[1].strip()
-    filename = f"src/plugins/addr/{group_id}.txt"  # Your IP list file
+    filename = f"{ADDR_DIR}/{group_id}.txt"  # Your IP list file
 
     if len(msg) < 2:
         return  # No arguments, do nothing
@@ -74,5 +75,5 @@ def addr(msgx, group_id):
         ad = delete_ad(filename, index)
         return f"已删除服务器{index}: {ad['name']} {ad['addr']}"
     else:
-        return "Invalid command or arguments."
+        return "未知命令"
 
