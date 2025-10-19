@@ -1,7 +1,8 @@
 import shlex
+from src.plugins.init import *
 
 def modify_list(msg, group_id):
-    filename = f"src/plugins/note/{group_id}.txt"
+    filename = f"{NOTE_DIR}/{group_id}.txt"
     try:
         # 读取文件内容
         with open(filename, 'r') as file:
@@ -63,7 +64,7 @@ def note(msgx, group_id):
     # 获取输入参数并处理引号与空格
     raw_input = msg
     search_term = shlex.split(raw_input)[0]
-    file_name = f"src/plugins/note/{group_id}.txt"
+    file_name = f"{NOTE_DIR}/{group_id}.txt"
 
     # 如果参数是 "列表"，调用显示函数
     if search_term == "列表":
