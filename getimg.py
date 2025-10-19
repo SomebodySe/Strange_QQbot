@@ -1,6 +1,7 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import addone,features
+from src.plugins import addone
+from src.plugins.init import *
 import requests
 import imghdr
 import os
@@ -21,17 +22,17 @@ async def handle_message(bot: Bot, event: GroupMessageEvent):
             # 获取图片URL
             image_url = seg.data["url"]
             
-            filename = f"src/plugins/lastimage/{group_id}.txt"
+            filename = f"{LAST_IMG_DIR}/{group_id}.txt"
             with open(filename, 'w', encoding='utf-8') as file:
                 file.write(image_url)
 
             if addone.imageadd(image_url,group_id):
                 content = requests.get(image_url).content
                 ext = imghdr.what(None, content)
-                save_path = f"src/plugins/imageadd/addimage.{ext}"
+                save_path = f"{IMG_ADD_DIR}/addimage.{ext}"
                 with open(save_path, 'wb') as f:
                     f.write(content)
-                image_path = os.path.abspath(f"src/plugins/imageadd/addimage.{ext}")
+                image_path = os.path.abspath(f"{IMG_ADD_DIR}/addimage.{ext}")
                 await bot.send_group_msg(group_id=group_id, message=MessageSegment.image(f"file://{image_path}"))
                 print("图片相同")
             else:
