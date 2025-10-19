@@ -1,11 +1,13 @@
 🔵命令列表：
 @机器人：聊天
 
+功能菜单：查看所有功能
+
 /ai<xxx>：问DeepSeek
 /ai+<xxx>：问DeepSeek(深度思考)
 
 /py<xxx>：python运行xxx，不支持中途输入
-/pip<xxx>：使用pip安装/卸载包
+/pip<xxx>：使用pip命令
 
 note<xxx>：把xxx添加到备忘
 note列表：查看备忘列表
@@ -29,4 +31,4 @@ note删除<xxx>：删除内容xxx（xxx非数字）
 服务器状态[xxx]：查看服务器xxx（地址）状态，没参数就查看ip列表内服务器的状态
 
 
-🔵项目地址：https://github.com/SomebodySe/QQbot-plugins
+🔵项目地址：https://github.com/SomebodySe/Strange_QQbot
