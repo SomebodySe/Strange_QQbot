@@ -1,6 +1,6 @@
 from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
-from src.plugins import status,geturl,ip,features,note,ai,py,addone
+from src.plugins import status,geturl,addr,features,note,ai,py,addone
 import os
 
 # 定义一个处理群消息的处理器
@@ -29,8 +29,6 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=ip.ip(msg, group_id))
     elif msg == "功能菜单":
         await bot.send_group_msg(group_id=group_id, message=features.features())
-    elif msg == "撸猫":
-        await bot.send_group_msg(group_id=group_id, message=MessageSegment.at(1838184387) + "\n〈.>ᯅ<.〉\n ( つाूीु⊂ )\n撸撸need")
     elif msg.startswith("note"):
         await bot.send_group_msg(group_id=group_id, message=note.note(msg, group_id).strip())
     elif msg.startswith("/send"):
