@@ -5,7 +5,7 @@ import os
 
 # 你的 DeepSeek API Key
 def ai(msgx, group_id, user_id, ischat):
-    API_KEY = "sk-xxxx"  # 替换为你的 API Key
+    API_KEY = "sk-xxx"  # 替换为你的 API Key
     client = OpenAI(api_key=API_KEY, base_url="https://api.deepseek.com/v1")
     
     mode = "deepseek-chat"
@@ -51,14 +51,15 @@ def ai(msgx, group_id, user_id, ischat):
         if lines and not lines[-1].endswith("\n"):
             lines[-1] = lines[-1] + "\n"
         # 追加当前用户输入
-        lines.append(f"{user_id}: {msg}\n")
+        msgx = msg.replace("\n", "  ")
+        lines.append(f"{user_id}: {msgx}\n")
         # 只保留最近 17 行（8 轮）
         if ischat == 0:
             if len(lines) > 7:
                 lines = lines[-7:]
         else:
-            if len(lines) > 37:
-                lines = lines[-37:]
+            if len(lines) > 57:
+                lines = lines[-57:]
         # 清空文件并写入更新后的内容
         file.seek(0)
         file.truncate()
@@ -93,8 +94,22 @@ def ai(msgx, group_id, user_id, ischat):
     # 将模型回答写入文件，保持对话历史
     with open(filename, 'a', encoding='utf-8') as file:
         file.write(f"0: {replyx}\n")
-    token = response.usage.completion_tokens + response.usage.prompt_cache_miss_tokens + 0.1*response.usage.prompt_cache_hit_tokens
-    print(f"token:{token}")
+    token = response.usage
+    usage = (3*token.completion_tokens + 2*token.prompt_cache_miss_tokens + 0.2*token.prompt_cache_hit_tokens)/1000000
+    print(f"usage:{usage}")
+
+    usagefile = f"{AI_DIR}/{group_id}_usage.txt"
+    with open(usagefile, "a+", encoding="utf-8") as f:
+        if (ischat == 0):
+            f.write(f"analyse:{usage}\n")
+        else:
+            f.write(f"chat:{usage}\n")
+    with open(usagefile, "r+", encoding="utf-8") as f:
+        lines = f.readlines()
+        if len(lines) > 10:
+            f.seek(0)
+            f.writelines(lines[-10:])
+            f.truncate()
 
     return reply
 
@@ -109,3 +124,11 @@ def savemsg(msg, group_id, user_id):
         file.write(f"{user_id}: {msgx}\n")
 
 
+def getusage(group_id):
+    try:
+        with open(f"{AI_DIR}/{group_id}_usage.txt", 'r') as file:
+            content = file.read()
+        return content.strip()  # 输出文件内容
+    except FileNotFoundError:
+        return f"未找到记录"
+    
