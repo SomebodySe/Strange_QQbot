@@ -20,6 +20,8 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         await bot.send_group_msg(group_id=group_id, message=status.status(msg, group_id))
     elif event.is_tome():
         await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id, user_id, 1))
+    elif msg.startswith("/aiusage"):
+        await bot.send_group_msg(group_id=group_id, message=ai.getusage(group_id))
     elif msg.startswith("/ai"):
         await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id, user_id, 0))
     elif msg.startswith("/mc"):
@@ -59,4 +61,3 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         if addone.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
         
-
