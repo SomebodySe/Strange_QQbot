@@ -2,7 +2,7 @@ from nonebot import on_message
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, MessageSegment
 from src.plugins import status,geturl,addr,features,note,ai,py,addone
 from src.plugins.init import *
-import os
+import os, re
 
 # 定义一个处理群消息的处理器
 group_message_handler = on_message(priority=9, block=True)
@@ -19,11 +19,11 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
     if msg.startswith("服务器状态"):
         await bot.send_group_msg(group_id=group_id, message=status.status(msg, group_id))
     elif event.is_tome():
-        await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id, user_id, 1))
+        await bot.send_group_msg(group_id=group_id, message=parse_at_message(ai.ai(msg, group_id, user_id, 1)))
     elif msg.startswith("/aiusage"):
         await bot.send_group_msg(group_id=group_id, message=ai.getusage(group_id))
     elif msg.startswith("/ai"):
-        await bot.send_group_msg(group_id=group_id, message=ai.ai(msg, group_id, user_id, 0))
+        await bot.send_group_msg(group_id=group_id, message=parse_at_message(ai.ai(msg, group_id, user_id, 0)))
     elif msg.startswith("/mc"):
         await bot.send_group_msg(group_id=group_id, message=geturl.mcwiki(msg))
     elif msg.startswith("/gt"):
@@ -61,3 +61,17 @@ async def handle_group_message(bot: Bot, event: GroupMessageEvent):
         if addone.textadd(msg, group_id):
            await bot.send_group_msg(group_id=group_id, message=msg)
         
+
+def parse_at_message(text):
+    msg = MessageSegment.text("")  # 初始化空消息段
+    # 匹配形如 [@123456789] 的部分
+    parts = re.split(r'(\[@\d{5,12}\])', text)
+
+    for part in parts:
+        if re.fullmatch(r'\[@\d{5,12}\]', part):
+            qq = int(part[2:-1])  # 去掉前缀 "[@" 和后缀 "]"
+            msg += MessageSegment.at(qq)
+        elif part:
+            msg += MessageSegment.text(part)
+
+    return msg
