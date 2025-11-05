@@ -5,7 +5,7 @@ import os
 
 # 你的 DeepSeek API Key
 def ai(msgx, group_id, user_id, ischat):
-    API_KEY = "sk-2961bc7f08c8456ca997c158edd366b4"  # 替换为你的 API Key
+    API_KEY = "sk-xxx"  # 替换为你的 API Key
     client = OpenAI(api_key=API_KEY, base_url="https://api.deepseek.com/v1")
     
     mode = "deepseek-chat"
