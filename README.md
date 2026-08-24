@@ -23,7 +23,7 @@ pip install openai mcstatus regex
       }
 ```
 
-nonebot中配置的token在nonebot路径下.env，没有则添加：
+nonebot路径下.env文件中的token与上面ws配置中相同即可，文件中没有则添加：
 ```bash
-ONEBOT_ACCESS_TOKEN=12345ABCDE（应该可以随便填）
+ONEBOT_ACCESS_TOKEN=12345ABCDE
 ```
