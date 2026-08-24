@@ -1,7 +1,8 @@
 # 需要的库：
 ```bash
-pip install nb-cli  nonebot2[fastapi] nonebot-adapter-onebot openai mcstatus
-pip install nonebot_plugin_emojimix
+# 基于nonebot2
+pip install nb-cli  nonebot2[fastapi] nonebot-adapter-onebot 
+pip install openai mcstatus regex
 ```
 
 
@@ -16,7 +17,7 @@ pip install nonebot_plugin_emojimix
         "messagePostFormat": "array",
         "reportSelfMessage": false,
         "reconnectInterval": 5000,
-        "token": "xxxx",
+        "token": "12345ABCDE",
         "debug": false,
         "heartInterval": 30000
       }
@@ -24,5 +25,5 @@ pip install nonebot_plugin_emojimix
 
 nonebot中配置的token在nonebot路径下.env，没有则添加：
 ```bash
-ONEBOT_ACCESS_TOKEN=xxxx（应该可以随便填）
+ONEBOT_ACCESS_TOKEN=12345ABCDE（应该可以随便填）
 ```
